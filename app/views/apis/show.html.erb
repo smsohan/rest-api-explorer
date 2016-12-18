@@ -6,7 +6,7 @@ Thank you for taking the time to participate in this study about REST API Docume
 </p>
 
 <p>
-  For the next few minutes, you'll be using the <%=link_to @api.name, @api.doc_url, target: "_blank" %> to perform a total of 5 API tasks. The data collected from this study will be used anonymously for scientific research and potentially published.
+  For the next few minutes, you'll be using the <%=link_to @api.name, @api.doc_url, target: "_blank" %> to perform a total of <%= @api.tasks.count %> API tasks. The data collected from this study will be used anonymously for scientific research and potentially published.
 </p>
 
 <%= link_to "Let's get started", api_task_path(@api, @api.tasks.first) %>

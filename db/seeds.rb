@@ -18,6 +18,7 @@ word_press.tasks << list_posts_task
 if list_posts_task.answers.default.none?
   list_posts_task.answers.create!(
     path: 'posts',
-    default:  true
+    default:  true,
+    method: 'GET'
   )
 end

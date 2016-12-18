@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   def create
     @task = Task.find(params[:task_id])
-    answer_params = params.require(:answer).permit(:path, :request_headers, :request_body)
+    answer_params = params.require(:answer).permit(:path, :method, :request_headers, :request_body)
 
     @answer = @task.answers.create!(answer_params)
     @answer.create_response!(headers: 'dummy: dummy', body: 'dummy body!')

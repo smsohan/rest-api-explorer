@@ -14,7 +14,7 @@
   <dt>Task</dt>
   <dd><%= @task.title %></dd>
   <dt>Description</dt>
-  <dd><%= @task.description %></dd>
+  <dd><%=auto_link @task.description, html: { target: '_blank' } %></dd>
   <dt>API Docs</dt>
   <dd><%=link_to @task.api.doc_url, @task.api.doc_url %></dd>
 <dl>
@@ -42,13 +42,18 @@
     <legend>API Call Editor</legend>
 
     <dl>
+      <dt><%= answer_form.label :method %></dt>
+      <dd class="code-snippet"><%=answer_form.select :method, Answer::METHODS, {prompt: 'Select one'}, required: true %></dd>
+    </dl>
+
+    <dl>
       <dt><%= answer_form.label :path, 'Request Path' %></dt>
-      <dd class="code-snippet"><%= @task.api.root %><%= answer_form.text_field :path, size: 30, placeholder: 'Request path...', class: 'code-snippet' %></dd>
+      <dd class="code-snippet"><%= @task.api.root %><%= answer_form.text_field :path, size: 30, placeholder: 'Request path...', class: 'code-snippet', required: true %></dd>
     </dl>
 
     <dl>
       <dt><%= answer_form.label :request_headers %></dt>
-      <dd><%= answer_form.text_area :request_headers, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'Request headers...' %></dd>
+      <dd><%= answer_form.text_area :request_headers, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'e.g. x-custom-header: my custom value (one header per row)' %></dd>
     </dl>
 
     <dl>
