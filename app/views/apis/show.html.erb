@@ -1,0 +1,14 @@
+<%= content_for :page_title do%>
+  Consent
+<% end %>
+<p>
+Thank you for taking the time to participate in this study about REST API Documentation. The objective of this study is to measure the impact of API documentation with or without usage examples on the productivity of REST API Client developers.
+</p>
+
+<p>
+  For the next few minutes, you'll be using the <%=link_to @api.name, @api.doc_url, target: "_blank" %> to perform a total of 5 API tasks. The data collected from this study will be used anonymously for scientific research and potentially published.
+</p>
+
+<%= link_to "Let's get started", api_task_path(@api, @api.tasks.first) %>
+<br>
+<%= link_to "Not interested", 'javascript:void(0)' %>

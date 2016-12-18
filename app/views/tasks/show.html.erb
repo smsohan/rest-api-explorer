@@ -1,0 +1,62 @@
+<p class="notice"><%= notice %></p>
+
+
+<%= content_for :page_title do%>
+  <%= @task.api.name%>
+<% end %>
+
+
+<% if @task.practice %>
+  <h3>This is a Practice Task</h3>
+<% end %>
+
+<dl>
+  <dt>Task</dt>
+  <dd><%= @task.title %></dd>
+  <dt>Description</dt>
+  <dd><%= @task.description %></dd>
+  <dt>API Docs</dt>
+  <dd><%=link_to @task.api.doc_url, @task.api.doc_url %></dd>
+<dl>
+
+
+
+<% if @answer.response %>
+<fieldset>
+  <legend>API Response</legend>
+  <dl>
+    <dt>Response Headers</dt>
+    <dd><pre class='code-snuppet'><%= @answer.response.headers %></pre></dd>
+  </dl>
+
+  <dl>
+    <dt>Response Body</dt>
+    <dd><pre class='code-snuppet'><%= @answer.response.body %></pre></dd>
+  </dl>
+</fieldset>
+<% end %>
+
+
+<%= form_for @answer.dup, url: api_task_answers_path(@task.api, @task) do |answer_form| %>
+  <fieldset>
+    <legend>API Call Editor</legend>
+
+    <dl>
+      <dt><%= answer_form.label :path, 'Request Path' %></dt>
+      <dd class="code-snippet"><%= @task.api.root %><%= answer_form.text_field :path, size: 30, placeholder: 'Request path...', class: 'code-snippet' %></dd>
+    </dl>
+
+    <dl>
+      <dt><%= answer_form.label :request_headers %></dt>
+      <dd><%= answer_form.text_area :request_headers, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'Request headers...' %></dd>
+    </dl>
+
+    <dl>
+      <dt><%= answer_form.label :request_body %></dt>
+      <dd><%= answer_form.text_area :request_body, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'Request body...' %></dd>
+    </dl>
+
+    <%= submit_tag 'Submit' %>
+
+  </fieldset>
+<% end %>
