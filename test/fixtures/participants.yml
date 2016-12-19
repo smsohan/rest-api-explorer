@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  company: MyString
+  years_of_industry_experience: 1
+  years_of_experience_with_rest_apis: 1
+
+two:
+  name: MyString
+  company: MyString
+  years_of_industry_experience: 1
+  years_of_experience_with_rest_apis: 1

@@ -1,23 +1,20 @@
 <p class="notice"><%= notice %></p>
 
 
-<%= content_for :page_title do%>
-  <%= @task.api.name%>
-<% end %>
-
-
 <% if @task.practice %>
   <h3>This is a Practice Task</h3>
 <% end %>
 
 <dl>
-  <dt>Task</dt>
-  <dd><strong><%= @task.title %></strong></dd>
-  <dt>Description</dt>
-  <dd><%=auto_link @task.description, html: { target: '_blank' } %></dd>
+  <dt>Task (<%= @task.api.tasks.completed_by(participant).count %>/<%= @task.api.tasks.count %>)</dt>
+  <dd>
+    <p>
+      <strong><%= @task.title %>.</strong> <%=auto_link @task.description, html: { target: '_blank' } %>
+    </p>
+  </dd>
   <dt>API Docs</dt>
   <dd><%=link_to @task.api.doc_url, @task.api.doc_url %></dd>
-<dl>
+</dl>
 
 <div class="two-panel">
   <div class="left">
@@ -45,13 +42,22 @@
           <dd><%= answer_form.text_area :request_body, cols: 30, rows: 5, class: 'code-snippet' , placeholder: 'Request body...' %></dd>
         </dl>
 
-        <%= submit_tag 'Submit' %>
 
-        <% if  @task.next %>
-          <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
-        <% else %>
-          <%= link_to 'Finish' %>
-        <% end %>
+        <div class="buttons" >
+
+          <%= submit_tag 'Submit' %>
+
+          <% if @task.previous_task %>
+            <%= link_to 'Previous Task', api_task_path(@task.api, @task.previous_task) %>
+          <% end %>
+
+          <% if  @task.next %>
+            <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
+          <% else %>
+            <%= link_to 'Finish' %>
+          <% end %>
+
+        </div>
 
       </fieldset>
     <% end %>

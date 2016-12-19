@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   belongs_to :task
   has_one :response
   validates :method, inclusion: {in: METHODS}, presence: true
+  belongs_to :participant
 
   def submit!
     api_response = RestClient::Request.execute(method: method.downcase.to_sym,

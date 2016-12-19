@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :participants, only: [:new, :create]
+
   resources :apis, only: [:show, :index] do
     resources :tasks, only: [:show] do
       resources :answers, only: [:create]

@@ -10,6 +10,13 @@
 
 <h1 class="banner">Live API Explorer</h1>
 
+<% if participant %>
+  <div class="participant-name">
+    Thank you <%= participant.name %> for participating in this study.
+  </div>
+<% end %>
+
+
 <h2 class="page-title"><%= yield :page_title %></h2>
 
 <%= yield %>

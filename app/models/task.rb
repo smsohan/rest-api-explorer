@@ -9,13 +9,31 @@ class Task < ActiveRecord::Base
   end
 
   def next
-    tasks = api.tasks
-    index = tasks.order(:id).index(self)
-    if tasks.count > index + 1
-      tasks.at(index + 1)
+    if all_tasks.count > index + 1
+      all_tasks.at(index + 1)
     else
       nil
     end
+  end
+
+  def all_tasks
+    api.tasks
+  end
+
+  def index
+    all_tasks.order(:id).index(self)
+  end
+
+  def previous_task
+    if index > 0
+      all_tasks.at(index - 1)
+    else
+      nil
+    end
+  end
+
+  def self.completed_by(participant)
+    joins(:answers).where(answers: {participant_id: participant.id})
   end
 
 end
