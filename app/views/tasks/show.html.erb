@@ -21,47 +21,63 @@
 
 
 
-<% if @answer.response %>
-<fieldset>
-  <legend>API Response</legend>
-  <dl>
-    <dt>Response Headers</dt>
-    <dd><pre class='code-snuppet'><%= @answer.response.headers %></pre></dd>
-  </dl>
+<div class="two-panel">
+  <div class="left">
+    <%= form_for @answer.dup, url: api_task_answers_path(@task.api, @task) do |answer_form| %>
+      <fieldset>
+        <legend>API Call Editor</legend>
 
-  <dl>
-    <dt>Response Body</dt>
-    <dd><pre class='code-snuppet'><%= @answer.response.body %></pre></dd>
-  </dl>
-</fieldset>
-<% end %>
+        <dl>
+          <dt><%= answer_form.label :method %></dt>
+          <dd class="code-snippet"><%=answer_form.select :method, Answer::METHODS, {prompt: 'Select one'}, required: true %></dd>
+        </dl>
 
+        <dl>
+          <dt><%= answer_form.label :path, 'Request Path' %></dt>
+          <dd class="code-snippet"><%= @task.api.root %><%= answer_form.text_field :path, size: 30, placeholder: 'Request path...', class: 'code-snippet', required: true %></dd>
+        </dl>
 
-<%= form_for @answer.dup, url: api_task_answers_path(@task.api, @task) do |answer_form| %>
-  <fieldset>
-    <legend>API Call Editor</legend>
+        <dl>
+          <dt><%= answer_form.label :request_headers %></dt>
+          <dd><%= answer_form.text_area :request_headers, cols: 30, rows: 5, class: 'code-snippet' , placeholder: 'e.g. x-custom-header: my custom value (one header per row)' %></dd>
+        </dl>
 
-    <dl>
-      <dt><%= answer_form.label :method %></dt>
-      <dd class="code-snippet"><%=answer_form.select :method, Answer::METHODS, {prompt: 'Select one'}, required: true %></dd>
-    </dl>
+        <dl>
+          <dt><%= answer_form.label :request_body %></dt>
+          <dd><%= answer_form.text_area :request_body, cols: 30, rows: 5, class: 'code-snippet' , placeholder: 'Request body...' %></dd>
+        </dl>
 
-    <dl>
-      <dt><%= answer_form.label :path, 'Request Path' %></dt>
-      <dd class="code-snippet"><%= @task.api.root %><%= answer_form.text_field :path, size: 30, placeholder: 'Request path...', class: 'code-snippet', required: true %></dd>
-    </dl>
+        <%= submit_tag 'Submit' %>
 
-    <dl>
-      <dt><%= answer_form.label :request_headers %></dt>
-      <dd><%= answer_form.text_area :request_headers, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'e.g. x-custom-header: my custom value (one header per row)' %></dd>
-    </dl>
+      </fieldset>
+    <% end %>
 
-    <dl>
-      <dt><%= answer_form.label :request_body %></dt>
-      <dd><%= answer_form.text_area :request_body, cols: 60, rows: 5, class: 'code-snippet' , placeholder: 'Request body...' %></dd>
-    </dl>
+  </div>
 
-    <%= submit_tag 'Submit' %>
+  <div class="right">
 
-  </fieldset>
-<% end %>
+    <fieldset>
+      <legend>API Response</legend>
+      <% if @answer.response %>
+        <div class="response-data">
+          <dl>
+            <dt>Response Code</dt>
+            <dd><pre class='code-snippet'><%= @answer.response.status_code %></pre></dd>
+          </dl>
+
+          <dl>
+            <dt>Response Headers</dt>
+            <dd><pre class='code-snippet'><%= JSON.pretty_generate JSON.parse(@answer.response.headers) %></pre></dd>
+          </dl>
+
+          <dl>
+            <dt>Response Body</dt>
+            <dd><pre class='code-snippet'><%= JSON.pretty_generate JSON.parse(@answer.response.body) %></pre></dd>
+          </dl>
+        </div>
+      <% else %>
+        <p>This section will show your the API response once you submit the form.</p>
+      <% end %>
+    </fieldset>
+  </div>
+<div>

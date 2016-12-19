@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218225614) do
+ActiveRecord::Schema.define(version: 20161219214242) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "task_id"
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20161218225614) do
     t.integer  "answer_id"
     t.text     "headers"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "status_code"
   end
 
   create_table "tasks", force: :cascade do |t|

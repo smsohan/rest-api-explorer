@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
     answer_params = params.require(:answer).permit(:path, :method, :request_headers, :request_body)
 
     @answer = @task.answers.create!(answer_params)
-    @answer.create_response!(headers: 'dummy: dummy', body: 'dummy body!')
+    @answer.submit!
     redirect_to api_task_path(@task.api_id, @task, answer_id: @answer.id), notice: 'API call performed. See the response below.'
   end
 end

@@ -15,7 +15,7 @@
  */
 
 body{
-width: 50%;
+width: 80%;
 margin: 0 auto;
 }
 
@@ -30,4 +30,26 @@ h2.page-title{
 .code-snippet{
   font-family: 'Courier New';
   font-size: 1.1em;
+  width: 100;
+}
+
+.two-panel {
+  width: 100%;
+  clear: both;
+}
+
+.left{
+  width: 38%;
+  padding: 1%;
+  float: left;
+}
+
+.right{
+  width: 58%;
+  max-width: 58%;
+  padding: 1%;
+  float: right;
+}
+
+.response-data{
 }
