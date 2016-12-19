@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :participants, only: [:new, :create]
+  resources :participants, only: [:new, :create, :update] do
+    collection do
+      get :edit_feedback, as: :edit_feedback
+    end
+  end
 
   resources :apis, only: [:show, :index] do
     resources :tasks, only: [:show] do

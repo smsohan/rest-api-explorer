@@ -54,7 +54,7 @@
           <% if  @task.next %>
             <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
           <% else %>
-            <%= link_to 'Finish' %>
+            <%= link_to 'Finish', edit_feedback_participants_path %>
           <% end %>
 
         </div>

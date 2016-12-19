@@ -1,5 +1,5 @@
 class ParticipantsController < ApplicationController
-  skip_before_action :setup_session
+  skip_before_action :setup_session, only: [:new, :create]
   def new
     @participant = Participant.new
   end
@@ -9,5 +9,8 @@ class ParticipantsController < ApplicationController
     participant = Participant.create!(participant_params)
     session[:participant_id] = participant.id
     redirect_to root_path
+  end
+
+  def edit_feedback
   end
 end

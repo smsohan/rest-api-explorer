@@ -1,0 +1,19 @@
+<%= form_for participant do |participant_form|%>
+
+  <fieldset>
+    <legend>Feedback</legend>
+
+
+    <dl>
+      <dt><%= participant_form.label :experience_rating, 'Rate your experience of using the API documentation to perform the tasks (10 being the best possible)' %> </dt>
+      <dd><%= participant_form.select :experience_rating, Participant.experience_ratings, prompt:  'Select one' %></dd>
+      <dt><%= participant_form.label :feedback, 'Share your thoughts about the reasoning behind the above rating' %> </dt>
+      <dd><%= participant_form.text_area :feedback, rows: 5, cols: 80 %></dd>
+    </dl>
+
+    <%= submit_tag 'Submit' %>
+
+  </fieldset>
+
+
+<% end %>

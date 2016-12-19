@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219215843) do
+ActiveRecord::Schema.define(version: 20161219224823) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "task_id"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20161219215843) do
     t.integer  "years_of_experience_with_rest_apis"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "experience_rating"
+    t.text     "feedback"
   end
 
   create_table "responses", force: :cascade do |t|
