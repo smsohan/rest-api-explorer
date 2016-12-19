@@ -7,6 +7,7 @@ class TasksController < ApplicationController
     else
       @answer = @task.default_or_new_answer
     end
+
   end
 
   private

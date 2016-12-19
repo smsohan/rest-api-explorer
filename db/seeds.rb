@@ -22,3 +22,14 @@ if list_posts_task.answers.default.none?
     method: 'GET'
   )
 end
+
+find_by_author_task = word_press.tasks.find_by(title: "Find all posts by author Spyrest")
+unless find_by_author_task
+  find_by_author_task = Task.create!(
+    title: "Find all posts by author Spyrest",
+    description: "Use the #{word_press.name} find a list of all the blog posts by author Spyrest from the blog at http://wp.spyrest.com",
+    practice: false
+  )
+end
+
+word_press.tasks << find_by_author_task

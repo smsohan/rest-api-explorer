@@ -12,14 +12,12 @@
 
 <dl>
   <dt>Task</dt>
-  <dd><%= @task.title %></dd>
+  <dd><strong><%= @task.title %></strong></dd>
   <dt>Description</dt>
   <dd><%=auto_link @task.description, html: { target: '_blank' } %></dd>
   <dt>API Docs</dt>
   <dd><%=link_to @task.api.doc_url, @task.api.doc_url %></dd>
 <dl>
-
-
 
 <div class="two-panel">
   <div class="left">
@@ -49,6 +47,12 @@
 
         <%= submit_tag 'Submit' %>
 
+        <% if  @task.next %>
+          <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
+        <% else %>
+          <%= link_to 'Finish' %>
+        <% end %>
+
       </fieldset>
     <% end %>
 
@@ -76,7 +80,7 @@
           </dl>
         </div>
       <% else %>
-        <p>This section will show your the API response once you submit the form.</p>
+        <p>This section will show you the API response once you submit the form.</p>
       <% end %>
     </fieldset>
   </div>
