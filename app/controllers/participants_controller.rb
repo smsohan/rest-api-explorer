@@ -13,4 +13,10 @@ class ParticipantsController < ApplicationController
 
   def edit_feedback
   end
+
+  def update
+    participant_params = params.require(:participant).permit(:experience_rating, :feedback)
+    participant.update_attributes!(participant_params)
+    redirect_to thank_you_path
+  end
 end

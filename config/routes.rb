@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'thank_you/index'
+
   resources :participants, only: [:new, :create, :update] do
     collection do
       get :edit_feedback, as: :edit_feedback
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'apis#index'
+
+  get 'thank_you' => 'thank_you#index', as: :thank_you
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
