@@ -56,11 +56,31 @@ end
 
 word_press.tasks << total_number_of_posts_task
 
-update_post_task = word_press.tasks.find_by(title: "Update the excerpt of the Post with id 1 to 'My new excerpt'")
+
+create_post_task = word_press.tasks.find_by(title: "Publish a Post")
+unless create_post_task
+  create_post_task = Task.create!(
+    title: "Publish a Post",
+    description: "Use the #{word_press.name} to publish a new post with title 'a random post' and content 'lorem ipsum' on the blog at http://wp.spyrest.com",
+    practice: false
+  )
+end
+
+word_press.tasks << create_post_task
+
+if create_post_task.answers.default.none?
+  create_post_task.answers.create!(
+    default:  true,
+    request_headers: "Authorization: Basic #{ENV['WP_AUTH_HEADER']}"
+  )
+end
+
+
+update_post_task = word_press.tasks.find_by(title: "Update the excerpt of the Post you published to 'My new excerpt'")
 unless update_post_task
   update_post_task = Task.create!(
-    title: "Update the excerpt of the Post with id 1 to 'My new excerpt'",
-    description: "Use the #{word_press.name} to update the excerpt for the post with ID 1 from the blog at http://wp.spyrest.com.",
+    title: "Update the excerpt of the Post you published to 'My new excerpt'",
+    description: "Use the #{word_press.name} to update the excerpt for the post you created from the blog at http://wp.spyrest.com.",
     practice: false
   )
 end
@@ -74,23 +94,6 @@ if update_post_task.answers.default.none?
   )
 end
 
-create_post_task = word_press.tasks.find_by(title: "Create a Post")
-unless create_post_task
-  create_post_task = Task.create!(
-    title: "Create a Post",
-    description: "Use the #{word_press.name} to create a new post with title 'a random post' and content 'lorem ipsum' on the blog at http://wp.spyrest.com",
-    practice: false
-  )
-end
-
-word_press.tasks << create_post_task
-
-if create_post_task.answers.default.none?
-  create_post_task.answers.create!(
-    default:  true,
-    request_headers: "Authorization: Basic #{ENV['WP_AUTH_HEADER']}"
-  )
-end
 
 
 
