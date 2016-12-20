@@ -61,7 +61,7 @@ create_post_task = word_press.tasks.find_by(title: "Publish a Post")
 unless create_post_task
   create_post_task = Task.create!(
     title: "Publish a Post",
-    description: "Use the #{word_press.name} to publish a new post with title 'a random post' and content 'lorem ipsum' on the blog at http://wp.spyrest.com",
+    description: "Use the #{word_press.name} to publish a new post with title 'a random post', content 'lorem ipsum' and published date of 'January 1, 2016' on the blog at http://wp.spyrest.com",
     practice: false
   )
 end
