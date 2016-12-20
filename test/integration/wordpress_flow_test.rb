@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class WordpressFlowTest < ActionDispatch::IntegrationTest
-  test "that the user is redirected to create an account" do
+  test "the user is redirected to create an account" do
     get '/'
     assert_response :redirect
     follow_redirect!
@@ -17,6 +17,8 @@ class WordpressFlowTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :redirect
-    assert Participant.where(name: 'Sohan').exists?
+    participant = Participant.find_by(name: 'Sohan')
+    assert_equal session[:participant_id], participant.id
   end
+
 end
