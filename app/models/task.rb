@@ -9,27 +9,19 @@ class Task < ActiveRecord::Base
   end
 
   def next
-    if all_tasks.count > index + 1
-      all_tasks.at(index + 1)
-    else
-      nil
-    end
+    all_tasks.where('tasks.id > ?', id).first
   end
 
   def all_tasks
-    api.tasks
+    api.tasks.order(:id)
   end
 
   def index
-    all_tasks.order(:id).index(self)
+    all_tasks.index(self)
   end
 
   def previous_task
-    if index > 0
-      all_tasks.at(index - 1)
-    else
-      nil
-    end
+    all_tasks.where('tasks.id < ?', id).last
   end
 
   def self.completed_by(participant)
