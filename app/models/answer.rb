@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   scope :default, -> {where default: true}
   belongs_to :task
   has_one :response
-  validates :method, inclusion: {in: METHODS}, presence: true
+  validates :method, inclusion: {in: METHODS, allow_nil: true}
   belongs_to :participant
 
   def submit!
@@ -11,6 +11,9 @@ class Answer < ActiveRecord::Base
       url: url,
       payload: request_body,
       headers: request_headers_hash)
+  rescue RestClient::Exception => exception
+    api_response = exception.response
+  ensure
     create_response!(headers: api_response.headers.to_json, body: api_response.body, status_code: api_response.code)
   end
 

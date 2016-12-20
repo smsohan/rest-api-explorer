@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_autolink'
-gem 'rest-client'
+gem 'rest-client', '2.0.0'
 # gem 'twitter-bootstrap-rails'
 
 # Use ActiveModel has_secure_password

@@ -33,7 +33,7 @@ class Task < ActiveRecord::Base
   end
 
   def self.completed_by(participant)
-    joins(:answers).where(answers: {participant_id: participant.id})
+    joins(:answers).where(answers: {participant_id: participant.id}).distinct
   end
 
 end
