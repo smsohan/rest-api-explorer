@@ -13,6 +13,7 @@
 <% if participant %>
   <div class="participant-name">
     Thank you <strong><%= participant.name %></strong> for participating in this study.
+    You can <%= link_to 'finish', edit_feedback_participants_path %> anytime.
   </div>
 <% end %>
 
