@@ -51,15 +51,19 @@
 
           <%= submit_tag 'Submit' %>
 
-          <% if @task.previous_task %>
-            <%= link_to 'Previous Task', api_task_path(@task.api, @task.previous_task) %>
-          <% end %>
+          <span class="paginator">
 
-          <% if  @task.next %>
-            <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
-          <% else %>
-            <%= link_to 'Finish', edit_feedback_participants_path %>
-          <% end %>
+            <% if @task.previous_task %>
+              <%= link_to 'Previous Task', api_task_path(@task.api, @task.previous_task) %>
+            <% end %>
+
+            <% if  @task.next %>
+              <%= link_to 'Next Task', api_task_path(@task.api, @task.next) %>
+            <% else %>
+              <%= link_to 'Finish', edit_feedback_participants_path %>
+            <% end %>
+
+          </span>
 
         </div>
 

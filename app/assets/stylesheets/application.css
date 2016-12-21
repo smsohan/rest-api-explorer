@@ -80,3 +80,10 @@ h2.page-title{
   width: 50%;
 }
 
+input[type=submit]{
+  font-size: 1.3em;
+}
+
+.paginator {
+  padding-left: 10px;
+}
