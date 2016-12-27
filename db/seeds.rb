@@ -93,8 +93,3 @@ if update_post_task.answers.default.none?
     request_headers: "Authorization: Basic #{ENV['WP_AUTH_HEADER']}"
   )
 end
-
-
-
-
-

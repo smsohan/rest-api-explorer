@@ -12,6 +12,9 @@ class ParticipantsController < ApplicationController
   end
 
   def edit_feedback
+    if @participant.answers.exists?
+      @api = @participant.answers.last.task.api
+    end
   end
 
   def update

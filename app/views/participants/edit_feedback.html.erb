@@ -5,7 +5,7 @@
 
 
     <dl>
-      <dt><%= participant_form.label :experience_rating, 'Rate your experience of using the API documentation to perform the tasks (10 being the best possible)' %> </dt>
+      <dt><%= participant_form.label :experience_rating, "Rate your experience of performing the API tasks using the <strong>#{@api ? @api.name : ''}</strong> documentation (10 being the best possible)".html_safe %> </dt>
       <dd><%= participant_form.select :experience_rating, Participant.experience_ratings, prompt:  'Select one' %></dd>
       <dt><%= participant_form.label :feedback, 'Share your thoughts about the reasoning behind the above rating' %> </dt>
       <dd><%= participant_form.text_area :feedback, rows: 5, cols: 80 %></dd>
