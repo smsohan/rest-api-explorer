@@ -1,4 +1,4 @@
-class Answer < ActiveRecord::Base
+  class Answer < ActiveRecord::Base
   METHODS = %W{GET POST PATCH DELETE PUT HEAD}
   scope :default, -> {where default: true}
   belongs_to :task
