@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  skip_before_action :setup_session, only: :index
+
   def create
     @task = Task.find(params[:task_id])
     answer_params = params.require(:answer).permit(:path, :method, :request_headers, :request_body)
