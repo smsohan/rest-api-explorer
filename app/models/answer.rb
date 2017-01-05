@@ -2,7 +2,7 @@
   METHODS = %W{GET POST PATCH DELETE PUT HEAD}
   scope :default, -> {where default: true}
   belongs_to :task
-  has_one :response
+  has_one :response, dependent: :destroy
   validates :method, inclusion: {in: METHODS, allow_nil: true}
   belongs_to :participant
 
