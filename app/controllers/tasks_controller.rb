@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def show
     if params[:answer_id]
-      @answer = @task.answers.find(params[:answer_id])
+      @answer = @task.answers.where(participant_id: participant.id).find(params[:answer_id])
     else
       @answer = @task.default_or_new_answer
     end
@@ -13,6 +13,5 @@ class TasksController < ApplicationController
   private
   def set_task
     @task = Task.find(params[:id])
-
   end
 end
