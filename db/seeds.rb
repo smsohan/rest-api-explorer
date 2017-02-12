@@ -1,5 +1,8 @@
 if Api.find_by(name: 'WordPress REST API').nil?
-  Api.create!(name: 'WordPress REST API', doc_url: "http://v2.wp-api.org/reference/posts/", root: 'http://wp.spyrest.com/wp-json/wp/v2/')
+  Api.create!(name: 'WordPress REST API',
+    doc_url: "http://v2.wp-api.org/reference/posts/",
+    forked_doc_url: 'https://spyrest.github.io/docs-v2/reference/posts/',
+    root: 'http://wp.spyrest.com/wp-json/wp/v2/')
 end
 
 word_press = Api.find_by(name: 'WordPress REST API')

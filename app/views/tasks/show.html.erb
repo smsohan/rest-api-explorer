@@ -17,7 +17,7 @@
     </p>
   </dd>
   <dt>API Docs</dt>
-  <dd><%=link_to @task.api.doc_url, @task.api.doc_url, target: '_blank' %></dd>
+  <dd><%=link_to @task.api.doc_url_for(@participant.doc_version), @task.api.doc_url_for(@participant.doc_version), target: '_blank' %></dd>
 </dl>
 
 <div class="two-panel">
