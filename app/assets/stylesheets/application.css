@@ -87,3 +87,8 @@ input[type=submit]{
 .paginator {
   padding-left: 10px;
 }
+
+.footer {
+  margin-top: 20px;
+  color: #555;
+}

@@ -1,17 +1,58 @@
 <%= content_for :page_title do%>
-  Consent
+Consent
 <% end %>
 
-<div class="half-width">
-  <p>
-  The objective of this study is to measure the impact of API documentation with or without usage examples on the productivity of REST API Client developers.
-  </p>
+<%= form_for participant do |participant_form|%>
 
-  <p>
-    For the next few minutes, you'll be using the <%=link_to @api.name, @api.doc_url, target: "_blank" %> to perform a total of <%= @api.tasks.count %> API tasks. The data collected from this study will be used anonymously for scientific research and potentially published.
-  </p>
+<div>
+  <small>
+    The University of Calgary Conjoint Faculties Research Ethics Board has approved this research study. Participation is completely voluntary, and confidential. You are free to discontinue participation at any time during the study.
+  </small>
 
-  <%= link_to "Let's get started", api_task_path(@api, @api.tasks.first) %>
-  <br>
-  <%= link_to "Not interested", thank_you_path %>
+  <h3>Purpose of the Study</h3>
+  <small>
+    You’ll be taking part in the study to improve the state of REST API documentation. Specifically, we’re trying to identify and measure, if any, the productivity difference of REST API client developers when they are given API documentation with or without usage examples.
+  </small>
+
+  <h3>What Will I Be Asked To Do?</h3>
+
+  <small>
+    You’ll be asked to perform 6 API tasks using an open-source REST API and its accompanying documentation. This web-based system will record the API calls you’ll make for us to later analyze, and potentially publish the results. You’ll be requested to provide a satisfaction rating and a free-form feedback about your experience using the API to end the study.
+  </small>
+
+  <h3>What Type of Personal Information Will Be Collected?</h3>
+  <small>
+    We request for your name and comany name for us to identify the participants. Only the researchers will have access to your name. Published material will remove the real name with a surrogate code name. The relationship between the code name and the company name will not be published. The following options are for you to consider if you decide to take part in this research.
+  </small>
+
+  <h3>Are there Risks or Benefits if I Participate?</h3>
+  <small>
+    You provide us with data to analyze and improve the state of REST API documentation for software
+    engineers including yourself. The risks are none to minimal.
+  </small>
+
+  <h3>What Happens to the Information I Provide?</h3>
+
+  <small>
+    Only the researchers have access to the collected identifiable data. It’s saved on a password protected cloud database hosted and secured the cloud platform provider Heroku (https://www.heroku.com/policy/security). Collected data can be removed upon request to the researcher (smsohan@ucalgary.ca) by April 1, 2017. Participation is completely voluntary, and confidential. You are free to discontinue participation at any time. The data will be stored for a maximum of two years on the database, at which time, it will be permanently erased.
+  </small>
+  <small>
+    Your acceptance on this form indicates that 1) you understand to your satisfaction the information provided to you about your participation in this research project, and 2) you agree to participate in the research project.
+    In no way does this waive your legal rights nor release the investigators, sponsors, or involved institutions from their legal and professional responsibilities. You are free to withdraw from this research project at any time. You should feel free to ask for clarification or new information throughout your participation.
+  </small>
+</small>
+<p>
+  <%= participant_form.check_box :grant_company_name_use %>
+  <strong>
+    <%= participant_form.label :grant_company_name_use, 'I grant permission to have my company’s name used without directly relating to my responses' %>
+  </strong>
+</p>
+
+
+<%= link_to "I accept. Let's get started", api_task_path(@api, @api.tasks.first) %>
+<br>
+<%= link_to "Not interested", thank_you_path %>
+
 </div>
+
+<% end %>
