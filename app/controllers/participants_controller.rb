@@ -22,4 +22,11 @@ class ParticipantsController < ApplicationController
     participant.update_attributes!(participant_params)
     redirect_to thank_you_path
   end
+
+  def accept_consent
+    participant_params = params.require(:participant).permit(:grant_company_name_use)
+    participant.update_attributes!(participant_params)
+    api = Api.first
+    redirect_to api_task_path(api, api.tasks.first)
+  end
 end

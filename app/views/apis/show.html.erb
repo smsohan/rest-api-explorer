@@ -2,7 +2,7 @@
 Consent
 <% end %>
 
-<%= form_for participant do |participant_form|%>
+<%= form_for participant, url: accept_consent_participants_path do |participant_form|%>
 
 <div>
   <small>
@@ -49,9 +49,7 @@ Consent
 </p>
 
 
-<%= link_to "I accept. Let's get started", api_task_path(@api, @api.tasks.first) %>
-<br>
-<%= link_to "Not interested", thank_you_path %>
+<%= participant_form.submit "I accept. Let's get started" %>  <%= link_to "Not interested", thank_you_path %>
 
 </div>
 
