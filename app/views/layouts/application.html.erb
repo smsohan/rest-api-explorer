@@ -8,29 +8,36 @@
 </head>
 <body>
 
-<h1 class="banner">Live API Explorer</h1>
+  <% if browser.device.mobile? %>
+  <div class="callout yellow">
 
-<% if participant %>
+    To participate you please use a computer instead of a phone since the tasks require you to browse some API documentation and use an on-line API call editor that works best on larger displays.
+  </div>
+  <% end %>
+
+  <h1 class="banner">Live API Explorer</h1>
+
+  <% if participant %>
   <div class="participant-name">
     Thank you <strong><%= participant.name %></strong> for participating in this study.
     <% unless @finished %>
-      You can <%= link_to 'finish', edit_feedback_participants_path %> anytime.
+    You can <%= link_to 'finish', edit_feedback_participants_path %> anytime.
     <% end %>
   </div>
-<% end %>
+  <% end %>
 
 
-<h2 class="page-title"><%= yield :page_title %></h2>
+  <h2 class="page-title"><%= yield :page_title %></h2>
 
-<%= yield %>
+  <%= yield %>
 
 
-<div class="footer">
-  <small>
-    If you have any concerns about the way you’ve been treated as a participant, please contact Research Ethics Administrators, Research Services Office, University of Calgary at (403) 220-6289/220-4283; email cfreb@ucalgary.ca. A copy of this consent form has been given to you to keep for your records and reference. The investigator has kept a copy of the consent form.
+  <div class="footer">
+    <small>
+      If you have any concerns about the way you’ve been treated as a participant, please contact Research Ethics Administrators, Research Services Office, University of Calgary at (403) 220-6289/220-4283; email cfreb@ucalgary.ca. A copy of this consent form has been given to you to keep for your records and reference. The investigator has kept a copy of the consent form.
 
-  </small>
-</div>
+    </small>
+  </div>
 
 </body>
 </html>

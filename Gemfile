@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_autolink'
 gem 'rest-client', '2.0.0'
+gem 'browser'
 # gem 'twitter-bootstrap-rails'
 
 # Use ActiveModel has_secure_password
