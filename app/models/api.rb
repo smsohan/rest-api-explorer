@@ -11,12 +11,12 @@ class Api < ActiveRecord::Base
   end
 
   def doc_url_for(doc_version)
-    sym_doc_version = doc_version.to_sym
-    if sym_doc_version == DocVersion::ORIGINAL
+#    sym_doc_version = doc_version.to_sym
+#    if sym_doc_version == DocVersion::ORIGINAL
       doc_url
-    else
-      forked_doc_url
-    end
+#    else
+#      forked_doc_url
+#    end
 
   end
 end
