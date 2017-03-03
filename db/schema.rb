@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212204724) do
+ActiveRecord::Schema.define(version: 20170303152640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170212204724) do
     t.text     "feedback"
     t.boolean  "grant_company_name_use",             default: false
     t.string   "doc_version"
+    t.string   "code_name"
   end
 
   create_table "responses", force: :cascade do |t|

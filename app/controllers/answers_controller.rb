@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
     file.puts "# Task:  #{task.title}. #{task.description}\n"
 
     Participant.order(:id).each do |participant|
-       file.puts "\n### Participant: #{participant.id}\n"
+       file.puts "\n### Participant: #{participant.code_name} using #{participant.doc_version} API documentation\n"
        task.answers.where(participant_id: participant.id).find_each.with_index do |answer, index|
          file.puts "\n#### Answer #{index + 1}"
          file.puts ""
@@ -39,7 +39,7 @@ class AnswersController < ApplicationController
          file.puts "- Request Headers: ```#{answer.request_headers}```\n" if answer.request_headers.present?
          file.puts "- Request Body: ```#{answer.request_body}```\n" if answer.request_headers.present?
          file.puts "- Response Code: ```#{answer.response.status_code}```\n" if answer.response.present?
-         file.puts "- Response Body: ```#{answer.response.body.truncate(400)}```\n" if answer.response.present?
+         file.puts "- Response Body: ```#{JSON.pretty_generate(JSON.parse(answer.response.body)).truncate(400)}```\n" if answer.response.present?
       end
     end
 
