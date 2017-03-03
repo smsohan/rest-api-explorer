@@ -37,9 +37,9 @@ class AnswersController < ApplicationController
          file.puts "- Method: ```#{answer.method}```\n"
          file.puts "- PATH: ```#{answer.path}```\n"
          file.puts "- Request Headers: ```#{answer.request_headers}```\n" if answer.request_headers.present?
-         file.puts "- Request Body: ```#{answer.request_body}```\n" if answer.request_headers.present?
+         file.puts "- Request Body: ```#{answer.request_body}```\n" if answer.request_body.present?
          file.puts "- Response Code: ```#{answer.response.status_code}```\n" if answer.response.present?
-         file.puts "- Response Body: ```#{JSON.pretty_generate(JSON.parse(answer.response.body)).truncate(400)}```\n" if answer.response.present?
+         file.puts "- Response Body: ```#{answer.response.body.truncate(400)}```\n" if answer.response.present?
       end
     end
 
