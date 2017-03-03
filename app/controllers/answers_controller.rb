@@ -10,36 +10,41 @@ class AnswersController < ApplicationController
     redirect_to api_task_path(@task.api_id, @task, answer_id: @answer.id), notice: 'API call performed. See the response below.'
   end
 
-  # def index
-  #   file = Tempfile.open("data.md")
-  #   Api.find_each do |api|
-  #     file.puts "# #{api.name}"
-  #     api.tasks.order(:id).offset(1).find_each.with_index do |task, index|
-  #       file.puts "\n## Task #{index + 1}\n"
-  #       file.puts "#{task.title}. #{task.description}\n"
+  def index
+    task_id = params[:task_id]
+    file = Tempfile.open("task-#{task_id}-data.md")
+    task = Task.find(task_id)
+    file.puts "# Task:  #{task.title}. #{task.description}\n"
 
-  #       Participant.order(:id).each do |participant|
-  #         file.puts "\n### Participant: #{participant.id}\n"
-  #         task.answers.where(participant_id: participant.id).find_each.with_index do |answer, index|
-  #           file.puts "\n#### Answer #{index + 1}"
-  #           file.puts ""
-  #           file.puts ""
+    Participant.order(:id).each do |participant|
+       file.puts "\n### Participant: #{participant.id}\n"
+       task.answers.where(participant_id: participant.id).find_each.with_index do |answer, index|
+         file.puts "\n#### Answer #{index + 1}"
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
+         file.puts ""
 
-  #           file.puts "- Method: ```#{answer.method}```\n"
-  #           file.puts "- PATH: ```#{answer.path}```\n"
-  #           file.puts "- Request Headers: ```#{answer.request_headers}```\n" if answer.request_headers.present?
-  #           file.puts "- Request Body: ```#{answer.request_body}```\n" if answer.request_headers.present?
-  #           file.puts "- Response Headers: ```#{answer.response.headers}```\n" if answer.response.present?
-  #           file.puts "- Response Body: ```#{answer.response.body.truncate(400)}```\n" if answer.response.present?
-  #         end
+         file.puts "- Time: ```#{answer.created_at.strftime("%H:%M:%S")}```\n"
+         file.puts "- Method: ```#{answer.method}```\n"
+         file.puts "- PATH: ```#{answer.path}```\n"
+         file.puts "- Request Headers: ```#{answer.request_headers}```\n" if answer.request_headers.present?
+         file.puts "- Request Body: ```#{answer.request_body}```\n" if answer.request_headers.present?
+         file.puts "- Response Code: ```#{answer.response.status_code}```\n" if answer.response.present?
+         file.puts "- Response Body: ```#{answer.response.body.truncate(400)}```\n" if answer.response.present?
+      end
+    end
 
-  #       end
+    file.close
+    send_file file.path, type: 'text/markdown; charset=UTF-8', filename: "task-#{task_id}-data.md"
+  end
 
-  #     end
-
-  #     file.close
-  #     send_file file.path, type: 'text/markdown; charset=UTF-8', filename: 'data.md'
-
-  #   end
-  # end
 end
