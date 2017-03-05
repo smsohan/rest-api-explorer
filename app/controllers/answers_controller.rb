@@ -12,11 +12,12 @@ class AnswersController < ApplicationController
 
   def index
     task_id = params[:task_id]
+    doc_version = params[:doc_version]
     file = Tempfile.open("task-#{task_id}-data.md")
     task = Task.find(task_id)
     file.puts "# Task:  #{task.title}. #{task.description}\n"
 
-    Participant.order(:id).each do |participant|
+    Participant.where(doc_version: doc_version).order(:id).each do |participant|
        file.puts "\n### Participant: #{participant.code_name} using #{participant.doc_version} API documentation\n"
        task.answers.where(participant_id: participant.id).find_each.with_index do |answer, index|
          file.puts "\n#### Answer #{index + 1}"
@@ -44,7 +45,7 @@ class AnswersController < ApplicationController
     end
 
     file.close
-    send_file file.path, type: 'text/markdown; charset=UTF-8', filename: "task-#{task_id}-data.md"
+    send_file file.path, type: 'text/markdown; charset=UTF-8', filename: "task-#{task_id}-#{doc_version}-data.md"
   end
 
 end
