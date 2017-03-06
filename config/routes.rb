@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'thank_you/index'
 
-  resources :participants, only: [:index, :new, :create, :update] do
+  resources :participants, only: [:new, :create, :update] do
     collection do
       get :edit_feedback, as: :edit_feedback
       patch :accept_consent, as: :accept_consent
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'answers' => 'answers#index'
+  # get 'answers' => 'answers#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
