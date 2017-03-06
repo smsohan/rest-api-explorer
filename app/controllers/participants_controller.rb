@@ -1,5 +1,23 @@
 class ParticipantsController < ApplicationController
-  skip_before_action :setup_session, only: [:new, :create]
+  skip_before_action :setup_session, only: [:new, :create, :index]
+
+
+  def index
+    doc_version = params[:doc_version]
+    file = Tempfile.open("participants-#{doc_version}-data.md")
+
+    Participant.where(doc_version: doc_version).order(:new_code_name).each do |participant|
+      file.puts "## #{participant.new_code_name}"
+      file.puts ""
+      file.puts "1. **Rating**: #{participant.experience_rating} / 10"
+      file.puts "2. **Feedback**: #{participant.feedback}"
+      file.puts ""
+    end
+    file.close
+    send_file file.path, type: 'text/markdown; charset=UTF-8', filename: "participants-#{doc_version}-data.md"
+
+  end
+
   def new
     @participant = Participant.new
   end

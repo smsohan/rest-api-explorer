@@ -4,14 +4,18 @@ class UpdateCodeNames < ActiveRecord::Migration
     index = 1
 
     Participant.where(doc_version:  'original' ).order(:id).each do |participant|
-      participant.new_code_name = "P#{index}"
+      puts "Index = #{index}"
+      participant.new_code_name = "P1.#{index}"
       index += 1
+      participant.save!
     end
 
 
+    index = 1
     Participant.where(doc_version:  'forked' ).order(:id).each do |participant|
-      participant.new_code_name = "P#{index}"
+      participant.new_code_name = "P2.#{index}"
       index += 1
+      participant.save!
     end
 
   end

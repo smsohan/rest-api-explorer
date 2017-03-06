@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'thank_you/index'
 
-  resources :participants, only: [:new, :create, :update] do
+  resources :participants, only: [:index, :new, :create, :update] do
     collection do
       get :edit_feedback, as: :edit_feedback
       patch :accept_consent, as: :accept_consent
